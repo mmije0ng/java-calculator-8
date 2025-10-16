@@ -1,7 +1,10 @@
 package calculator;
 
+import calculator.view.InputView;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        String input = InputView.readInput();
+        // TODO: 입력값 파싱 및 계산 로직 연결 예정
     }
 }
