@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.util.Calculator;
 import calculator.util.DelimiterExtractor;
 import calculator.util.StringSplitter;
 import calculator.view.InputView;
@@ -8,23 +9,23 @@ import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
-        String input = InputView.readInput();
-
         try {
-            // 1. 입력 문자열에서 구분자 추출
-            List<String> delimiters = DelimiterExtractor.extractDelimiters(input);
-            System.out.println("사용 중인 구분자: " + delimiters); // 디버깅용
+            // (1) 사용자 입력 받기
+            String input = InputView.readInput();
 
-            // 2. 구분자를 이용해 문자열 분리
+            // (2) 구분자 추출
+            List<String> delimiters = DelimiterExtractor.extractDelimiters(input);
+
+            // (3) 입력값을 구분자를 기준으로 분리
             String[] tokens = StringSplitter.split(input, delimiters);
 
-            // 3. 분리 결과 확인 (향후 Calculator로 전달 예정)
-            System.out.println("분리된 입력값: " + String.join(", ", tokens)); // 디버깅용
+            // (4) 정수 변환 및 합계 계산
+            int result = Calculator.sum(tokens);
 
-            // TODO: 분리된 숫자들을 더하기, 숫자가 아닌 경우 예외처리
+            // (5) 결과 출력
+            System.out.printf("결과 : %d%n", result);
 
         } catch (IllegalArgumentException e) {
-            // 4. 모든 예외는 [ERROR] 형식으로 출력 후 종료
             System.out.println("[ERROR] " + e.getMessage());
         }
     }

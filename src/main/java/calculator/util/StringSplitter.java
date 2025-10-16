@@ -2,6 +2,7 @@ package calculator.util;
 
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.Arrays;
 
 /**
  * 입력 문자열을 커스텀 또는 기본 구분자 기준으로 분리하는 유틸리티 클래스.
@@ -46,10 +47,8 @@ public final class StringSplitter {
         String[] tokens = input.split(regex, -1);
 
         // 구분자 뒤에 값이 없거나 연속된 구분자로 인해 빈 문자열("") 발생 시 예외 처리
-        for (String token : tokens) {
-            if (token.isEmpty()) {
-                throw new IllegalArgumentException("구분자 뒤에 값이 없습니다. (예: 1,2, 또는 1::2)");
-            }
+        if (Arrays.stream(tokens).anyMatch(String::isEmpty)) {
+            throw new IllegalArgumentException("구분자 뒤에 값이 없습니다. (예: 1,2, 또는 1::2)");
         }
 
         // 정상적으로 분리된 문자열 배열 반환
