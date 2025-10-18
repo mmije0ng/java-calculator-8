@@ -1,20 +1,18 @@
-package calculator.util;
+package calculator.parser;
 
 import java.util.List;
 import java.util.regex.Pattern;
 
 /**
- * 입력 문자열을 커스텀 또는 기본 구분자 기준으로 분리하는 유틸리티 클래스.
+ * 입력 문자열을 커스텀 또는 기본 구분자 기준으로 분리하는 파서 클래스.
  */
-public final class StringSplitter {
-
-    private StringSplitter() {}
+public class StringParser {
 
     /**
      * 입력 문자열을 구분자 기준으로 분리한다.
      * 구분자 뒤 값이 없거나 연속된 구분자가 존재하면 예외 발생.
      */
-    public static String[] split(String input, List<String> delimiters) {
+    public String[] split(String input, List<String> delimiters) {
         if (input == null || input.isBlank()) {
             throw new IllegalArgumentException("입력이 비어 있습니다.");
         }

@@ -1,27 +1,31 @@
 package calculator;
 
-import calculator.util.Calculator;
-import calculator.util.DelimiterExtractor;
-import calculator.util.StringSplitter;
+import calculator.service.CalculatorService;
 import calculator.view.InputView;
-import java.util.List;
+import calculator.view.OutputView;
 
 /**
- * 1. 사용자 입력을 받아 구분자 추출 및 계산 수행
- * 2. 잘못된 입력 시 IllegalArgumentException이 발생하여 프로그램 종료
+ * 계산기 애플리케이션의 메인 클래스.
+ * 사용자 입력을 받아 계산을 수행한다.
  */
 public class Application {
-    public static void main(String[] args) {
+    private final CalculatorService calculatorService;
+
+    public Application() {
+        this.calculatorService = new CalculatorService();
+    }
+
+    /**
+     * 계산기 애플리케이션을 실행한다.
+     */
+    public void run() {
         String input = InputView.readInput();
+        int result = calculatorService.calculate(input);
+        OutputView.printResult(result);
+    }
 
-        // 입력 문자열에서 구분자 목록을 추출
-        List<String> delimiters = DelimiterExtractor.extractDelimiters(input);
-
-        // 입력 문자열을 추출된 구분자를 기준으로 분리
-        String[] tokens = StringSplitter.split(input, delimiters);
-
-        // 분리된 문자열 배열을 정수로 변환하고 합계를 계산
-        int result = Calculator.calculate(tokens);
-        System.out.println("결과 : " + result);
+    public static void main(String[] args) {
+        Application application = new Application();
+        application.run();
     }
 }

@@ -1,22 +1,18 @@
-package calculator.util;
+package calculator.parser;
 
 import java.util.List;
 
 /**
- * 입력 문자열에서 커스텀 구분자를 추출하는 유틸리티 클래스.
+ * 입력 문자열에서 커스텀 구분자를 추출하는 파서 클래스.
  * 1. "//"와 "\n" 사이의 문자열을 커스텀 구분자로 인식한다.
  * 2. 커스텀 구분자가 없으면 기본 구분자(, :)를 사용한다.
  * 3. 형식이 잘못된 경우 IllegalArgumentException을 발생시킨다.
  */
-public final class DelimiterExtractor {
+public class DelimiterParser {
 
     private static final String CUSTOM_PREFIX = "//";
-
     private static final String CUSTOM_SUFFIX = "\n";
-
     private static final List<String> DEFAULT_DELIMITERS = List.of(",", ":");
-
-    private DelimiterExtractor() {}
 
     /**
      * 입력 문자열에서 커스텀 구분자를 추출한다.
@@ -25,7 +21,7 @@ public final class DelimiterExtractor {
      * @return 커스텀 구분자 1개 또는 기본 구분자 리스트
      * @throws IllegalArgumentException 잘못된 형식(형식 오류, 누락 등)의 입력일 경우
      */
-    public static List<String> extractDelimiters(String input) {
+    public List<String> extractDelimiters(String input) {
         // 1. 입력이 null 또는 공백("")인 경우
         if (input == null || input.isBlank()) {
             return DEFAULT_DELIMITERS;
@@ -69,7 +65,7 @@ public final class DelimiterExtractor {
      *
      * @return 기본 구분자 리스트 [",", ":"]
      */
-    public static List<String> getDefaultDelimiters() {
+    public List<String> getDefaultDelimiters() {
         return DEFAULT_DELIMITERS;
     }
 }
